@@ -1,5 +1,5 @@
 name: First workflow
-on: push
+on: [push, workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -14,7 +14,6 @@ jobs:
         run: npm ci # this will use dependencies from package-lock.json not from latest versions in package.json
       - name: Run tests #step 4
         run: npm test
-
   deploy:
     runs-on: ubuntu-latest
     needs: test
@@ -29,6 +28,6 @@ jobs:
         run: npm ci # this will use dependencies from package-lock.json not from latest versions in package.json
       - name: Build project #step 4
         run: npm run build
-      - name: Deploy 
+      - name: Deploy #step 5
         run: echo "Deploying the project..." # Replace this with your actual deployment command
 
