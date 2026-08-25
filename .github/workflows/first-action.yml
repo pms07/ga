@@ -14,3 +14,21 @@ jobs:
         run: npm ci # this will use dependencies from package-lock.json not from latest versions in package.json
       - name: Run tests #step 4
         run: npm test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Check out the repo #step 1
+        uses: actions/checkout@v3
+      - name: Install Node #step 2
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies #step 3
+        run: npm ci # this will use dependencies from package-lock.json not from latest versions in package.json
+      - name: Build project #step 4
+        run: npm run build
+      - name: Deploy 
+        run: echo "Deploying the project..." # Replace this with your actual deployment command
+
